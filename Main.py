@@ -11,15 +11,17 @@ pantalla = pygame.display.set_mode((ANCHO_PANTALLA, ALTO_PANTALLA))
 fondo = pygame.image.load("assets/fondo.png")
 fondo = pygame.transform.scale(fondo, (800, 600))
 reloj = pygame.time.Clock()
+limites = [pygame.Rect(100, 100, 500, 400)]
+
 
 jugador = Jugador()
-enemigos, paredes = nivel1.crear_enemigos()
+enemigos = nivel1.crear_enemigos(limites)
+paredes = nivel1.crearParedes(limites)
 corazon_lleno = pygame.image.load("assets/corazon_lleno.png")
 corazon_vacio = pygame.image.load("assets/corazon_vacio.png")
 corazones = Corazones(5, corazon_lleno, corazon_vacio, 1, pantalla)
 
 textura_pared = pygame.image.load("assets/textura_pared.png")
-arma = Proyectil()
 
 camara_x = 0
 camara_y = 0
@@ -39,7 +41,8 @@ while running:
             if evento.key == pygame.K_SPACE:
                 jugador.disparar()
 
-    jugador.actualizar(paredes)
+    jugador.actualizar(paredes,enemigos,corazones)
+    nivel1.mantener_dentro_limites(jugador, ANCHO_PANTALLA, ALTO_PANTALLA)
     for proyectil in jugador.proyectiles:
         proyectil.actualizar()
         pantalla.blit(proyectil.image, proyectil.rect)
@@ -48,6 +51,7 @@ while running:
 
     for enemigo in enemigos:
         enemigo.actualizar(jugador,paredes)
+        nivel1.mantener_dentro_limites(enemigo, ANCHO_PANTALLA, ALTO_PANTALLA)
         pantalla.blit(enemigo.image, enemigo.rect)
     for pared in paredes:
         pygame.draw.rect(pantalla, (128, 128, 128), pared.rect)

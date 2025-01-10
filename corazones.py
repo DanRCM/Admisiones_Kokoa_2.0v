@@ -1,5 +1,3 @@
-import pygame
-
 class Corazones:
     def __init__(self, cantidad_inicial, imagen_llena, imagen_vacia, margen, pantalla):
         self.corazones = [imagen_llena] * cantidad_inicial
@@ -17,5 +15,7 @@ class Corazones:
 
     def perder_vida(self):
         if self.corazones:
-            self.corazones.pop()
-            self.corazones.append(self.imagen_vacia) 
+            for i, corazon in enumerate(self.corazones):
+                if corazon == self.imagen_llena:
+                    self.corazones[i] = self.imagen_vacia
+                    return
