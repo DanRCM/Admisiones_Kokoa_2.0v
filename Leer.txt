@@ -1,0 +1,1 @@
+Solo subi la carpeta de assets que es donde se trabaja en unity las otras son de paquetes y cosas para que funcione unity, dentro de assets hay diferentes carpetas con diferentes contenidos incluyendo la de los scripts
