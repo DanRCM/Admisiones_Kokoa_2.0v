@@ -13,9 +13,7 @@ class Jugador(pygame.sprite.Sprite):
         self.tiempo_entre_disparos = 1000
         self.vidas = 5
         self.daño = 10
-        self.proyectiles = []
         self.direccion = pygame.Vector2(0, -1)
-        self.velocidad_proyectil = 10
         self.velocidad_x = 0
         self.velocidad_y = 0
 
