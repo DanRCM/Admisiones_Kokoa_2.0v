@@ -7,7 +7,7 @@ class Enemigo(pygame.sprite.Sprite):
         super().__init__()
         self.image = pygame.transform.scale(pygame.image.load("assets/enemigo.png").convert_alpha(),(40,50))
         self.rect = self.image.get_rect()
-
+        self.vida = 20
         self.rect.x = x
         self.rect.y = y
         self.velocidad = 3
@@ -18,6 +18,10 @@ class Enemigo(pygame.sprite.Sprite):
     def actualizar(self, jugador, paredes):
         direccion_x = jugador.rect.x - self.rect.x
         direccion_y = jugador.rect.y - self.rect.y
+
+        if self.vida <= 0:
+            self.vida = 0
+            self.kill()
 
         distancia = ((direccion_x ** 2) + (direccion_y ** 2)) ** 0.5
         if distancia > 0:

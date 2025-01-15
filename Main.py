@@ -50,7 +50,7 @@ while running:
         grupo_balas.add(bala)
 
     for bala in grupo_balas:
-        bala.update()
+        bala.update(enemigos)
 
     for enemigo in enemigos:
         enemigo.actualizar(jugador,paredes)

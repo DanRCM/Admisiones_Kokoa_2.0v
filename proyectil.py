@@ -1,6 +1,7 @@
 import pygame
-import constantes
 import math
+import constantes
+from enemigo import Enemigo
 from constantes import *
 
 class Proyectil(pygame.sprite.Sprite):
@@ -52,12 +53,19 @@ class Bala(pygame.sprite.Sprite):
         self.delta_x = math.cos(math.radians(self.angulo))*20
         self.delta_y = -(math.sin(math.radians(self.angulo))*20)
 
-    def update(self):
+    def update(self, enemigos):
         self.rect.x += self.delta_x
         self.rect.y += self.delta_y
 
         if self.rect.right < 0 or self.rect.left > constantes.ANCHO_PANTALLA or self.rect.bottom < 0 or self.rect.top > constantes.ALTO_PANTALLA:
             self.kill()
+
+        for enemigo in enemigos:
+            if enemigo.rect.collicrect(self.rect):
+                daño = 10
+                enemigo.vida -= daño
+                self.kill()
+                break
 
     def dibujar(self, pantalla):
         pantalla.blit(self.image, (self.rect.centerx, self.rect.centery - int(self.image.get_height()/2)))
