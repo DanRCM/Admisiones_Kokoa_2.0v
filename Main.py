@@ -6,8 +6,15 @@ from corazones import Corazones
 import nivel1 as nivel1  
 from constantes import *
 
-#FALTA SISTEMA DE COLISIONES ENEMIGOS, PROYECTIL, MENU, GAMEOVER POR PERDIDA DE VIDAS
+#FALTA SISTEMA MENU, GAMEOVER POR PERDIDA DE VIDAS
 #FALTA COMENTARIO AUTOR Y MODULARIZAR FUNCIONES
+
+def mostrar_mensaje(mensaje):
+    font = pygame.font.Font(None, 36)
+    text = font.render(mensaje, True, (255, 255, 255))
+    text_rect = text.get_rect(center=(ANCHO_PANTALLA // 2, ALTO_PANTALLA // 2))
+    pantalla.blit(text, text_rect)
+    pygame.display.flip()
 
 pygame.init()
 pantalla = pygame.display.set_mode((ANCHO_PANTALLA, ALTO_PANTALLA))
@@ -23,7 +30,7 @@ proyectil = Proyectil(imagen_pistola, jugador, imagen_bala)
 
 grupo_balas = pygame.sprite.Group()
 
-
+enemigos_muertos = []
 enemigos = nivel1.crear_enemigos(limites)
 paredes = nivel1.crearParedes(limites)
 corazon_lleno = pygame.image.load("assets/corazon_lleno.png")
@@ -34,10 +41,17 @@ textura_pared = pygame.image.load("assets/textura_pared.png")
 
 running = True
 while running:
+    
     reloj.tick(FPS)
-
     pantalla.fill(COLOR_FONDO)
     pantalla.blit(fondo, (0, 0))
+
+    if not enemigos:
+        mostrar_mensaje("¡Has ganado!")
+        running = False
+    elif corazones.cant <= 0:
+        mostrar_mensaje("¡Has perdido!")
+        running = False
 
     for evento in pygame.event.get():
         if evento.type == pygame.QUIT:
@@ -56,6 +70,13 @@ while running:
         enemigo.actualizar(jugador,paredes)
         nivel1.mantener_dentro_limites(enemigo, ANCHO_PANTALLA, ALTO_PANTALLA)
         pantalla.blit(enemigo.image, enemigo.rect)
+        if enemigo.vida <= 0:
+            enemigos_muertos.append(enemigo)
+
+    if enemigos_muertos != 0:
+        for enemigo in enemigos_muertos:
+            enemigos.remove(enemigo)
+    enemigos_muertos.clear()
 
     for pared in paredes:
         pygame.draw.rect(pantalla, (128, 128, 128), pared.rect)

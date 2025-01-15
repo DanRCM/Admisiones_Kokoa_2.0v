@@ -61,10 +61,12 @@ class Bala(pygame.sprite.Sprite):
             self.kill()
 
         for enemigo in enemigos:
-            if enemigo.rect.collicrect(self.rect):
+            if enemigo.rect.colliderect(self.rect):
                 daño = 10
                 enemigo.vida -= daño
                 self.kill()
+                if enemigo.vida == 0:
+                    enemigo.kill()
                 break
 
     def dibujar(self, pantalla):
