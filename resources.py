@@ -1,6 +1,10 @@
 sonido_salto = "src/cartoon-jump-6462.mp3"
 imagen_jugador = "src/avatarGATO.png"
 imagen_jugador_salto = "src/avatarGATO_SALTO.png"
-plataformaBacon = "src/baconPlattform.png"
-fondo = "src/fondoJUEGO.png"
-
+plataformaBacon = "src/plataforma"
+fondo_1 = "src/fondoJUEGO1.png"
+fondo_2 = "src/fondoJUEGO2.png"
+fondo_3 = "src/fondoJUEGO3.png"
+fondo_4 = "src/fondoJUEGO4.png"
+fondo_5 = "src/fondoJUEGO5.png"
+fondo_menu = "src/menu.png"
