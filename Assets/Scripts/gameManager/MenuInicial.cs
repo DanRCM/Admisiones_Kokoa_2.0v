@@ -11,6 +11,7 @@ public class MenuInicial : MonoBehaviour
     {
         //Debug.log es para mostrar por consola que si se activo esta funcion
         Debug.Log("Esta saliendo");
+        gameManager.instance.fileManager.GuardarData();
         Application.Quit();
     }
 }

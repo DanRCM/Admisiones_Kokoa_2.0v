@@ -18,7 +18,7 @@ public class movement : MonoBehaviour
     //El jumpBufferTime es otra cosa usada, en pocas palabras hace es que si se da al espacio momentos antes de tocar el suelo a lo que toque el suelo pueda saltar
     private float jumpBufferTime = 0.2f;
     private float jumpBufferCounter;
-    
+    private bool canDoubleJump;
     [Header("Capa a detectar (suelo)")]
     [SerializeField] private LayerMask suelo;
     
@@ -54,11 +54,12 @@ public class movement : MonoBehaviour
     {
         MoverHorizontal();
         movimientoVertical();
-        
+        mejoraDobleSalto();
         //Esto es solo para poder moverme entre escenas al final no va a estar
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             gameManager.instance.cargarEscena();
+
         }
     }
 
@@ -73,15 +74,17 @@ public class movement : MonoBehaviour
     //Movimiento vertical(Salto)
     private void movimientoVertical()
     {
-
+       
         //Si esta en el suelo el coyoteTimeCounter se actualiza al tiempo maximo permitido de lo contrario se le resta
         if (estaEnSuelo())
         {
             coyoteTimeCounter = coyoteTime;
+            canDoubleJump = true;
         }
         else
         {
             coyoteTimeCounter -= Time.deltaTime;
+            
         }
 
         //Si se presiona la tecla espacio el contador del jumpBUFFER se actualiza al tiempo maximo permitido de lo contrario se le resta
@@ -206,40 +209,26 @@ public class movement : MonoBehaviour
     //Esta son las mejoras todavia estoy trabajando en esto
     private void mejoraDobleSalto()
     {
+        if (gameManager.instance.dobleSaltos > 0  && canDoubleJump && Input.GetButtonDown("Jump") && !estaEnSuelo())
+        {
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0);
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, fuerzaSalto);
+            particulas.Play();
+            gameManager.instance.dobleSaltos -= 1;
+            Debug.Log(gameManager.instance.dobleSaltos);
+            canDoubleJump = false;
+        }
+        if (Input.GetButtonUp("Jump") && rb.linearVelocity.y > 0f)
+        {
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y * 0.5f);
+
+        
+        }
 
     }
 
-    private void mejoraDash()
-    {
 
-    }
+
+ }
     
   
-
-    //Aun por trabajar
-    /*  private void mejoraPausar()
-      {
-
-          if (Input.GetKeyDown(KeyCode.V) && gameManager.instance.pausarTiempo > 0 )
-          {
-              Debug.Log("Si se detecto el presionado");
-              StartCoroutine(tiempoParado());
-              gameManager.instance.pausarTiempo -= 1;
-
-
-          }
-
-
-
-      }
-
-      IEnumerator tiempoParado ()
-      {
-          Time.timeScale = 0;
-
-          yield return new WaitForSecondsRealtime(5);
-          Time.timeScale = 1;
-
-      }
-    */
-}

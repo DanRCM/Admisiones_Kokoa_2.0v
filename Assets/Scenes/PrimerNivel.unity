@@ -873,6 +873,38 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8856187470298287154, guid: e9f28ae35d8d7964c9e23c87b76f5867, type: 3}
+      propertyPath: tiempoAnimacion
+      value: 3.26
+      objectReference: {fileID: 0}
+    - target: {fileID: 8856187470298287154, guid: e9f28ae35d8d7964c9e23c87b76f5867, type: 3}
+      propertyPath: curvaAnimacion.m_Curve.Array.data[0].inSlope
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8856187470298287154, guid: e9f28ae35d8d7964c9e23c87b76f5867, type: 3}
+      propertyPath: curvaAnimacion.m_Curve.Array.data[1].inSlope
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8856187470298287154, guid: e9f28ae35d8d7964c9e23c87b76f5867, type: 3}
+      propertyPath: curvaAnimacion.m_Curve.Array.data[0].outSlope
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8856187470298287154, guid: e9f28ae35d8d7964c9e23c87b76f5867, type: 3}
+      propertyPath: curvaAnimacion.m_Curve.Array.data[1].inWeight
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8856187470298287154, guid: e9f28ae35d8d7964c9e23c87b76f5867, type: 3}
+      propertyPath: curvaAnimacion.m_Curve.Array.data[1].outSlope
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8856187470298287154, guid: e9f28ae35d8d7964c9e23c87b76f5867, type: 3}
+      propertyPath: curvaAnimacion.m_Curve.Array.data[0].tangentMode
+      value: 34
+      objectReference: {fileID: 0}
+    - target: {fileID: 8856187470298287154, guid: e9f28ae35d8d7964c9e23c87b76f5867, type: 3}
+      propertyPath: curvaAnimacion.m_Curve.Array.data[1].tangentMode
+      value: 34
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1175,6 +1207,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isEnemy: 0
   cantidadDano: 3
+  aleatorio: 0
 --- !u!61 &1631559255
 BoxCollider2D:
   m_ObjectHideFlags: 0

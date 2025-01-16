@@ -1,6 +1,6 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.ProBuilder;
+
 
 public class PlataformaMovimiento : MonoBehaviour
 {
@@ -31,14 +31,17 @@ public class PlataformaMovimiento : MonoBehaviour
         // Al iniciar se establecen la posicion inicial y final
         posInicial = transform.position;
         posFinal = ObposFinal.position;
+        moviendo = false;
+
     }
 
     
-    void Update()
+    void FixedUpdate()
     {
         //Si no se esta movimiendo inicia la corutina que recibe como parametro la posicion inicial final y tiempo de animacion
         if ( !moviendo )
         {
+            
             StartCoroutine(moverPosicion(posInicial, posFinal, tiempoAnimacion));
         }
 
@@ -49,30 +52,26 @@ public class PlataformaMovimiento : MonoBehaviour
 
     IEnumerator moverPosicion(Vector2 posInicio, Vector2 posFin, float duracion)
     {
-        //Establece la variable de movimiento como true
+
         moviendo = true;
-        
-        //Este tiempo es cuanto espera para volver a hacer el movimiento
-        yield return new WaitForSeconds(tiempoEspera);
-        
-        //Variable para determinar la duracion de la animacion
         float tiempoPasado = 0;
         while (tiempoPasado < duracion)
         {
-            //Establezco la posicion inicial y final
-
+            
             //Y con el metodo lerp(interpolacion lineal) hago que la posicion vaya variando de un punto a a un punto b
-            transform.position = Vector2.Lerp(posInicio,posFin, curvaAnimacion.Evaluate( tiempoPasado/duracion));
-            tiempoPasado += Time.deltaTime;
+            transform.position = Vector2.Lerp(posInicio,posFin, curvaAnimacion.Evaluate(tiempoPasado/duracion));
+            tiempoPasado += Time.fixedUnscaledDeltaTime;
+           
+            yield return null;
         }
         //No siempre se mueve exactamente a la posicion final sino que varia un poco por eso lo muevo directamente
+    
         transform.position = posFin;
-        
         //Funcion que como su nombre lo indica cambia las posiciones, ahora la inicial es la final y viceversa
         cambiarPosiciones();
+        yield return new WaitForSeconds(tiempoEspera);
         moviendo = false;
      
-
     }
 
     private void cambiarPosiciones() 

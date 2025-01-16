@@ -11,10 +11,7 @@ public class MenuOpciones : MonoBehaviour
     [Header("UI Elements")]
     public Toggle fullscreenToggle;
     public TMP_Dropdown resolutionDropdown;
-    public Slider volumeSlider;
 
-    [Header("Audio")]
-    public AudioMixer audioMixer;
 
     private Resolution[] resolutions;
 
@@ -67,11 +64,7 @@ public class MenuOpciones : MonoBehaviour
       
     }
 
-    public void SetVolume(float volume)
-    {
-        audioMixer.SetFloat("Volume", Mathf.Log10(volume) * 20);
-        PlayerPrefs.SetFloat("volume", volume);
-    }
+   
 
     public void LoadSettings()
     {
@@ -82,6 +75,7 @@ public class MenuOpciones : MonoBehaviour
             fullscreenToggle.isOn = isFullScreen;
             Screen.fullScreen = isFullScreen;
         }
+
 
         // Resolución
         if (PlayerPrefs.HasKey("resolution"))
@@ -95,12 +89,5 @@ public class MenuOpciones : MonoBehaviour
             }
         }
 
-        // Volumen
-        if (PlayerPrefs.HasKey("volume"))
-        {
-            float volume = PlayerPrefs.GetFloat("volume");
-            volumeSlider.value = volume;
-            audioMixer.SetFloat("Volume", Mathf.Log10(volume) * 20);
-        }
     }
 }

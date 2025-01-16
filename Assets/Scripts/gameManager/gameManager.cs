@@ -14,11 +14,12 @@ public class gameManager : MonoBehaviour
     [Header("Puntajes")]
     public int puntosEscena;
     public int puntosTotales;
+    public int monedasUsables;
     [Header("No se destruye al cargar nueva escena")]// Este lo hago para poder probar en cada nivel con un gameManager pero en el exportado final solo habra una instancia de este.
     public bool dontDestroyOnLoad;
     private int vidas = 3;
-    private float tiempoTranscurrido;
-    
+    public float tiempoTranscurrido;
+    public float tiempoGuardar;
     //Objeto del jugador
     private GameObject player;
     
@@ -31,6 +32,7 @@ public class gameManager : MonoBehaviour
 
     //Objeto de la interfaz
     public GameObject interfaz;
+    public GameObject menuOpciones;
 
     //Arreglo con todas las pantallas de muerte
     public GameObject[] pantallasMuertes;
@@ -41,13 +43,17 @@ public class gameManager : MonoBehaviour
 
     //Los leera desde un archivo de guardado de mejoras
     public int dobleSaltos ;
-    public int pausarTiempo;
-    public bool timePaused;
-    private bool canDash;
+
+    public bool canDash;
+
+    public FileManager fileManager;
     
     // Al iniciar se ejecuta este codigo
     private void Start()
     {
+        puntosEscena = 0;
+        puntosTotales = 0;
+        tiempoGuardar = 1000000000000000000000000.00000000000000f;
         //Setea los fps del juego a 60 en un inicio
         Application.targetFrameRate = FpsJuego;
 
@@ -66,6 +72,8 @@ public class gameManager : MonoBehaviour
 
         //Instancia el objeto que tiene la animacion al inicio
         Instantiate(AnimacionInicio) ;
+
+        fileManager.CargarData(); 
 
     }
 
@@ -97,26 +105,25 @@ public class gameManager : MonoBehaviour
        //Busca al jugador y su script porque cada escena tiene su objeto jugador
         player = GameObject.FindWithTag("Player");
         movement = player.GetComponent<movement>();
-        
-        //Esta mecanica decidi que los puntos cuenten por nivel para que si mueras en uno no pierdas todos los puntos.
-        puntosTotales = puntosEscena;
-        puntosEscena = 0;
-
-        //Si la escena no es la primera activa el hud de lo contrario la desactiva reinicia el tiempo y las vidas.
         if (!SceneManager.GetActiveScene().buildIndex.Equals(0))
         {
             interfaz.SetActive(true);
+            puntosTotales = puntosTotales + puntosEscena;
+
+            puntosEscena = 0;
         }
         else
         {
-            interfaz.SetActive(false);
-            tiempoTranscurrido = 0;
+            hud.ActualizarPuntos(0);
             hud.activarVida(0); hud.activarVida(1); hud.activarVida(2);
-            puntosTotales = 0;
+            interfaz.SetActive(false);
+            monedasUsables += puntosTotales;
+            tiempoTranscurrido = 0;
             puntosEscena = 0;
+            puntosTotales = 0;
             vidas = 3;
+            
         }
-        
     }
 
     //Funcion de perder vida recibe si es un enemigo y la cantidad de daño
@@ -194,9 +201,12 @@ public class gameManager : MonoBehaviour
     //En el update si la escena es diferente de la inicial y aparte no esta el tiempo pausado( una mejora) aumenta el tiempo transcurrido con la funcion Time.deltaTime y actualiza el tiempo
     private void Update()
     {
-        if (!SceneManager.GetActiveScene().buildIndex.Equals(0) && !timePaused)
+        if (!SceneManager.GetActiveScene().buildIndex.Equals(0))
         {
-           
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                menuOpciones.SetActive(!menuOpciones.activeSelf);
+            }
             tiempoTranscurrido += Time.deltaTime;
             hud.sumarTiempo(tiempoTranscurrido);
         }
@@ -227,7 +237,7 @@ public class gameManager : MonoBehaviour
     //La corutina de transicion activa la animacion espera un tiempo cambia de escena, espera otro tiempo y hacer la transicion
     IEnumerator transition()
     {
-
+      
 
         transicion.SetActive(true);
         yield return new WaitForSeconds(0.8f);
@@ -244,5 +254,36 @@ public class gameManager : MonoBehaviour
     }
 
     
+
+    //Hice todas estas funciones para obtener los elementos  y modificarlos porque estaba teniendo problemas al modificarlos directamente.
+    public int getMonedasUsables()
+    {
+        return monedasUsables;
+    }
+    
+    public void changeMonedasUsables(int cant)
+    {
+        monedasUsables -= cant;
+    }
+
+    public bool getDash()
+    {
+        return canDash;
+    }
+
+    public void changeDash()
+    {
+        canDash = true;
+    }
+
+    public int getDoublejump()
+    {
+        return dobleSaltos;
+    }
+    
+    public void changeDoublejump()
+    {
+        dobleSaltos += 1;
+    }
 
 }
