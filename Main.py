@@ -1,20 +1,27 @@
+#Autor: Isaac Criollo Córdova
+#Ninja Survivor es un juego del tipo rougue like con vista desde arriba, se trata de sobrevivir contra enemigos que te persiguen
+#Cada partida es diferente debido a que las paredes en el juego se generan aletaoriamente en cada partida!
+
+
 import pygame
 from jugador import Jugador
 from enemigo import Enemigo
 from proyectil import Proyectil
 from corazones import Corazones
-import nivel1 as nivel1  
+import nivel1 as nivel1
+import time
 from constantes import *
 
-#FALTA SISTEMA MENU, GAMEOVER POR PERDIDA DE VIDAS
-#FALTA COMENTARIO AUTOR Y MODULARIZAR FUNCIONES
-
-def mostrar_mensaje(mensaje):
+def mostrar_mensaje(mensaje, negro):
     font = pygame.font.Font(None, 36)
     text = font.render(mensaje, True, (255, 255, 255))
     text_rect = text.get_rect(center=(ANCHO_PANTALLA // 2, ALTO_PANTALLA // 2))
     pantalla.blit(text, text_rect)
     pygame.display.flip()
+    time.sleep(1)
+    if negro == 1:
+        pygame.draw.rect(pantalla, COLOR_NEGRO, text_rect)
+        pygame.display.flip()
 
 pygame.init()
 pantalla = pygame.display.set_mode((ANCHO_PANTALLA, ALTO_PANTALLA))
@@ -39,18 +46,25 @@ corazones = Corazones(5, corazon_lleno, corazon_vacio, 1, pantalla)
 
 textura_pared = pygame.image.load("assets/textura_pared.png")
 
+mostrar_mensaje("¡Ninja Survivor! Preparate para sobrevivir",1)
+time.sleep(0.3)
+mostrar_mensaje("¡Te mueves con WASD y el mouse!",1)
+
 running = True
 while running:
-    
+
     reloj.tick(FPS)
     pantalla.fill(COLOR_FONDO)
     pantalla.blit(fondo, (0, 0))
 
     if not enemigos:
-        mostrar_mensaje("¡Has ganado!")
+        mostrar_mensaje("¡Has ganado, Gracias por Jugar!", 0)
+        time.sleep(1)
         running = False
+
     elif corazones.cant <= 0:
-        mostrar_mensaje("¡Has perdido!")
+        mostrar_mensaje("¡Has perdido!", 0)
+        time.sleep(1)
         running = False
 
     for evento in pygame.event.get():
