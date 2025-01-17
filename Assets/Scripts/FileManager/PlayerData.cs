@@ -15,8 +15,5 @@ public class PlayerData
         this.puntajeAlto = puntaje;
         this.canDash = candash;
         this.doblesSaltos = doubleJumps;
-    }
-    
-
-    
+    }   
 }

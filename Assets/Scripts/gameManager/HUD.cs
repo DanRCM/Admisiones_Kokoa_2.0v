@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using System.Diagnostics.SymbolStore;
 
 public class HUD : MonoBehaviour
 {
@@ -7,11 +8,13 @@ public class HUD : MonoBehaviour
     //Estos objetos de TextMeshPro son los textos de la interfaz, puntos y tiempo
     private TextMeshProUGUI puntos;
     private TextMeshProUGUI time;
+    public TextMeshProUGUI numSaltos;
     //Los objetos que contienen a los elementos de texto
     private GameObject tiempo;
     private GameObject Money;
     [Header("Elento Vida Ui")]
     public GameObject[] vidas;
+    
 
     private void Start()
     {
@@ -43,6 +46,13 @@ public class HUD : MonoBehaviour
     public void quitarVida(int indice)
     {
         vidas[indice].SetActive(false);
+    }
+
+
+    public void actualizarSalto(int saltos)
+    {
+        Debug.Log(saltos);
+        numSaltos.text = saltos.ToString();
     }
     public void activarVida(int indice)
     {

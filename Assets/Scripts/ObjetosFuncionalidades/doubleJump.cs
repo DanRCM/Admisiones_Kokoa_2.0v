@@ -26,6 +26,7 @@ public class doubleJump : MonoBehaviour
         animator.SetTrigger("Recogido");
         rb.linearVelocity = new Vector2(0, 0);
         rb.AddForce(Vector2.up * fuerzaSalto, ForceMode2D.Impulse);
+        AudioManager.instance.PlaySfx("orbeSalto");
     }
 
 

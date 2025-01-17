@@ -2,6 +2,7 @@ using UnityEngine;
 using System.IO;
 public class FileManager : MonoBehaviour
 {
+    //Metodo para guardar los datos
     public void GuardarData()
     {
         string ruta = Application.persistentDataPath + "/playerData.json";
@@ -17,6 +18,7 @@ public class FileManager : MonoBehaviour
         Debug.Log("Se guardo la data");
     }
 
+    //Metodo para cargar los datos
     public void CargarData()
     {
         string ruta = Application.persistentDataPath + "/playerData.json";

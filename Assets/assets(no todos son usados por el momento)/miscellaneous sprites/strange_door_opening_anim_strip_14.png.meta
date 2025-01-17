@@ -61,7 +61,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -99,7 +99,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 2
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -168,8 +168,8 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 50
-        height: 45
+        width: 16
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -188,10 +188,10 @@ TextureImporter:
       name: strange_door_opening_anim_strip_14_1
       rect:
         serializedVersion: 2
-        x: 49
+        x: 16
         y: 0
         width: 16
-        height: 33
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -210,10 +210,10 @@ TextureImporter:
       name: strange_door_opening_anim_strip_14_2
       rect:
         serializedVersion: 2
-        x: 66
+        x: 32
         y: 0
-        width: 15
-        height: 29
+        width: 16
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -232,10 +232,10 @@ TextureImporter:
       name: strange_door_opening_anim_strip_14_3
       rect:
         serializedVersion: 2
-        x: 81
+        x: 48
         y: 0
         width: 16
-        height: 25
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -254,10 +254,10 @@ TextureImporter:
       name: strange_door_opening_anim_strip_14_4
       rect:
         serializedVersion: 2
-        x: 96
+        x: 64
         y: 0
-        width: 19
-        height: 21
+        width: 16
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -276,10 +276,10 @@ TextureImporter:
       name: strange_door_opening_anim_strip_14_5
       rect:
         serializedVersion: 2
-        x: 114
+        x: 80
         y: 0
         width: 16
-        height: 17
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -298,10 +298,10 @@ TextureImporter:
       name: strange_door_opening_anim_strip_14_6
       rect:
         serializedVersion: 2
-        x: 130
+        x: 96
         y: 0
-        width: 15
-        height: 13
+        width: 16
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -320,10 +320,10 @@ TextureImporter:
       name: strange_door_opening_anim_strip_14_7
       rect:
         serializedVersion: 2
-        x: 146
+        x: 112
         y: 0
-        width: 15
-        height: 9
+        width: 16
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -342,10 +342,10 @@ TextureImporter:
       name: strange_door_opening_anim_strip_14_8
       rect:
         serializedVersion: 2
-        x: 160
+        x: 128
         y: 0
-        width: 49
-        height: 5
+        width: 16
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -360,11 +360,99 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: strange_door_opening_anim_strip_14_9
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 0
+        width: 16
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 95cce5044098f154c9b23f8ca2ac6525
+      internalID: 2116261751
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: strange_door_opening_anim_strip_14_10
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 0
+        width: 16
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: be7ba4773c2fe944585b9575442e13e9
+      internalID: 536845345
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: strange_door_opening_anim_strip_14_11
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 0
+        width: 16
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 55f8962e75d8fd147b43c67e95245133
+      internalID: -659415044
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: strange_door_opening_anim_strip_14_12
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 16
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0b9b9db9c9c70fb42921dc013b455f05
+      internalID: -1574014043
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 610645295c0c3e84dbabeb2d3ee6a4a2
     internalID: 0
     vertices: []
     indices: 
@@ -376,6 +464,9 @@ TextureImporter:
     nameFileIdTable:
       strange_door_opening_anim_strip_14_0: 347451276584246300
       strange_door_opening_anim_strip_14_1: -4249389619412451124
+      strange_door_opening_anim_strip_14_10: 536845345
+      strange_door_opening_anim_strip_14_11: -659415044
+      strange_door_opening_anim_strip_14_12: -1574014043
       strange_door_opening_anim_strip_14_2: 6938579174742508395
       strange_door_opening_anim_strip_14_3: -2650451347613823636
       strange_door_opening_anim_strip_14_4: -5287527108188383539
@@ -383,6 +474,7 @@ TextureImporter:
       strange_door_opening_anim_strip_14_6: -302128725182431008
       strange_door_opening_anim_strip_14_7: 4300021848910839685
       strange_door_opening_anim_strip_14_8: 6099008848845824659
+      strange_door_opening_anim_strip_14_9: 2116261751
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

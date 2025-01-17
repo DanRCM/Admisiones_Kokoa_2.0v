@@ -1,5 +1,89 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6809597180100910750
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8244787768343276021}
+  - component: {fileID: 4514908195144456752}
+  m_Layer: 0
+  m_Name: Light 2D
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8244787768343276021
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6809597180100910750}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 581987392186809533}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4514908195144456752
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6809597180100910750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ComponentVersion: 2
+  m_LightType: 1
+  m_BlendStyleIndex: 0
+  m_FalloffIntensity: 0.472
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 1
+  m_LightVolumeIntensity: 1
+  m_LightVolumeEnabled: 0
+  m_ApplyToSortingLayers: 0b480fb800000000bd5efd0f23accd4d
+  m_LightCookieSprite: {fileID: 0}
+  m_DeprecatedPointLightCookieSprite: {fileID: 0}
+  m_LightOrder: 0
+  m_AlphaBlendOnOverlap: 0
+  m_OverlapOperation: 0
+  m_NormalMapDistance: 3
+  m_NormalMapQuality: 2
+  m_UseNormalMap: 0
+  m_ShadowsEnabled: 1
+  m_ShadowIntensity: 0.75
+  m_ShadowSoftness: 0.3
+  m_ShadowSoftnessFalloffIntensity: 0.5
+  m_ShadowVolumeIntensityEnabled: 0
+  m_ShadowVolumeIntensity: 0.75
+  m_LocalBounds:
+    m_Center: {x: -0.005099997, y: 0.0042000003, z: 0}
+    m_Extent: {x: 0.122999996, y: 0.0908, z: 0}
+  m_PointLightInnerAngle: 360
+  m_PointLightOuterAngle: 360
+  m_PointLightInnerRadius: 0
+  m_PointLightOuterRadius: 1
+  m_ShapeLightParametricSides: 5
+  m_ShapeLightParametricAngleOffset: 0
+  m_ShapeLightParametricRadius: 1
+  m_ShapeLightFalloffSize: 0.05
+  m_ShapeLightFalloffOffset: {x: 0, y: 0}
+  m_ShapePath:
+  - {x: -0.07944939, y: -0.010079851, z: 0.0000000065849726}
+  - {x: 0.017847918, y: -0.039394338, z: 0.0000000065849726}
+  - {x: 0.06986471, y: -0.010708778, z: 0.0000000065849726}
+  - {x: 0.018102566, y: 0.045699794, z: 0.0000000065849726}
 --- !u!1001 &3552271088134865007
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -29,12 +113,24 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3291490057976269056, guid: f745b9cb4d2c9dd46a6345c9eea1a226, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 8.27
+      objectReference: {fileID: 0}
+    - target: {fileID: 3291490057976269056, guid: f745b9cb4d2c9dd46a6345c9eea1a226, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 8.27
+      objectReference: {fileID: 0}
+    - target: {fileID: 3291490057976269056, guid: f745b9cb4d2c9dd46a6345c9eea1a226, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 8.27
+      objectReference: {fileID: 0}
+    - target: {fileID: 3291490057976269056, guid: f745b9cb4d2c9dd46a6345c9eea1a226, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.99
+      value: -1.6
       objectReference: {fileID: 0}
     - target: {fileID: 3291490057976269056, guid: f745b9cb4d2c9dd46a6345c9eea1a226, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.35
+      value: 2.5742304
       objectReference: {fileID: 0}
     - target: {fileID: 3291490057976269056, guid: f745b9cb4d2c9dd46a6345c9eea1a226, type: 3}
       propertyPath: m_LocalPosition.z
@@ -68,6 +164,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4134183275376131282, guid: f745b9cb4d2c9dd46a6345c9eea1a226, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.73
+      objectReference: {fileID: 0}
+    - target: {fileID: 4134183275376131282, guid: f745b9cb4d2c9dd46a6345c9eea1a226, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.73
+      objectReference: {fileID: 0}
+    - target: {fileID: 4134183275376131282, guid: f745b9cb4d2c9dd46a6345c9eea1a226, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.73
+      objectReference: {fileID: 0}
+    - target: {fileID: 4134183275376131282, guid: f745b9cb4d2c9dd46a6345c9eea1a226, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.051
+      objectReference: {fileID: 0}
     - target: {fileID: 4194784069639624757, guid: f745b9cb4d2c9dd46a6345c9eea1a226, type: 3}
       propertyPath: m_Size.x
       value: 0.19035977
@@ -95,12 +207,20 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 6893225938618434436, guid: f745b9cb4d2c9dd46a6345c9eea1a226, type: 3}
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 4134183275376131282, guid: f745b9cb4d2c9dd46a6345c9eea1a226, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8244787768343276021}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 1055654065840706376, guid: f745b9cb4d2c9dd46a6345c9eea1a226, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1803697123938751105}
   m_SourcePrefab: {fileID: 100100000, guid: f745b9cb4d2c9dd46a6345c9eea1a226, type: 3}
+--- !u!4 &581987392186809533 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4134183275376131282, guid: f745b9cb4d2c9dd46a6345c9eea1a226, type: 3}
+  m_PrefabInstance: {fileID: 3552271088134865007}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &4605595257693442855 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1055654065840706376, guid: f745b9cb4d2c9dd46a6345c9eea1a226, type: 3}

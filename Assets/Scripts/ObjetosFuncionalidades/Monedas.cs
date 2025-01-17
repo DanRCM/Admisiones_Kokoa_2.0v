@@ -23,6 +23,7 @@ public class Monedas : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             animator.SetTrigger("isPickup");
+            AudioManager.instance.PlaySfx("cogerMoneda");
             Invoke("Destroy",0.3f);
             gameManager.instance.SumarPuntos(valorMoneda);
         }

@@ -18,7 +18,10 @@ public class movement : MonoBehaviour
     //El jumpBufferTime es otra cosa usada, en pocas palabras hace es que si se da al espacio momentos antes de tocar el suelo a lo que toque el suelo pueda saltar
     private float jumpBufferTime = 0.2f;
     private float jumpBufferCounter;
+
+    //Variable para permitir el doble salto
     private bool canDoubleJump;
+
     [Header("Capa a detectar (suelo)")]
     [SerializeField] private LayerMask suelo;
     
@@ -27,6 +30,8 @@ public class movement : MonoBehaviour
  
     [Header("Particulas, Correr y Saltar")]
     [SerializeField] ParticleSystem particulas;
+
+
 
     //El animator del jugador
     private Animator animator;
@@ -47,20 +52,31 @@ public class movement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         boxCollider = GetComponent<BoxCollider2D>();    
         animator = GetComponent<Animator>();
+
     }
 
     // Esta funcion se ejecuta cada frame y ejecuta las dos funciones principales(por el momento) del jugador el cual son sus dos movimientos.
     void Update()
     {
-        MoverHorizontal();
-        movimientoVertical();
-        mejoraDobleSalto();
+        //Cada frame se ejecutan estas funciones de los diferentes movimientos del personaje
+
+   
+
+            MoverHorizontal();
+            movimientoVertical();
+            mejoraDobleSalto();
+
+   
+       
+
         //Esto es solo para poder moverme entre escenas al final no va a estar
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             gameManager.instance.cargarEscena();
 
         }
+
+      
     }
 
 
@@ -79,10 +95,12 @@ public class movement : MonoBehaviour
         if (estaEnSuelo())
         {
             coyoteTimeCounter = coyoteTime;
+            //Si esta en el suelo se reinicia la variable que permite el doble salto
             canDoubleJump = true;
         }
         else
         {
+            
             coyoteTimeCounter -= Time.deltaTime;
             
         }
@@ -105,6 +123,7 @@ public class movement : MonoBehaviour
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, fuerzaSalto);
             particulas.Play();
+            AudioManager.instance.PlaySfx("saltar");
 
             jumpBufferCounter = 0f;
 
@@ -192,40 +211,47 @@ public class movement : MonoBehaviour
                 direccionGolpe = new Vector2(2, 3);
                 direccionGolpe = new Vector2(2, 3);
             }
-
+        AudioManager.instance.PlaySfx("dano");
         animator.SetTrigger("gotHit");
         rb.linearVelocity = new Vector2(0, 0);
         rb.AddForce(direccionGolpe * fuerzaGolpe);
       
     }
 
-
-
-
-
-
-
-
-    //Esta son las mejoras todavia estoy trabajando en esto
+    //Mejora de doble salto
     private void mejoraDobleSalto()
     {
-        if (gameManager.instance.dobleSaltos > 0  && canDoubleJump && Input.GetButtonDown("Jump") && !estaEnSuelo())
-        {
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0);
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, fuerzaSalto);
-            particulas.Play();
-            gameManager.instance.dobleSaltos -= 1;
-            Debug.Log(gameManager.instance.dobleSaltos);
-            canDoubleJump = false;
+        //Si se salta tiene doble saltos disponibles y ademas no esta en el suelo podra saltar
+        if (gameManager.instance.dobleSaltos > 0   && Input.GetButtonDown("Jump") && !estaEnSuelo())
+        {  
+            if (canDoubleJump){
+                //Reinicio la velocidad en y le anado la velocidad que le corresponde.
+                rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0);
+                AudioManager.instance.PlaySfx("saltar");
+                rb.linearVelocity = new Vector2(rb.linearVelocity.x, fuerzaSalto);
+                particulas.Play();
+
+             
+
+                //Actualizo la cantidad de doble saltos permitidos
+                gameManager.instance.usarDobleSalto();
+
+                canDoubleJump = false;
+
+            }
+
+
         }
+
+        //Si deja de presionar el boton caera mas rapido
         if (Input.GetButtonUp("Jump") && rb.linearVelocity.y > 0f)
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y * 0.5f);
 
-        
         }
-
     }
+
+
 
 
 

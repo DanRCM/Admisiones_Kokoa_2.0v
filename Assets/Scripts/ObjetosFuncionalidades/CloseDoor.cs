@@ -9,6 +9,8 @@ public class CloseDoor : MonoBehaviour
     {
         animator = GetComponent<Animator>();
     }
+
+    //Cuando entra el jugador en esta zona se inicia la cortuina para abrir la puerta.
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
@@ -21,6 +23,7 @@ public class CloseDoor : MonoBehaviour
     IEnumerator abriendoPuerta()
     {
         animator.SetBool("Close",true);
+        AudioManager.instance.PlaySfx("openDoor");
         yield return new WaitForSeconds(1.3f);
         Destroy(gameObject);
     }

@@ -1,6 +1,8 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 public class gameManager : MonoBehaviour
 {
@@ -15,8 +17,10 @@ public class gameManager : MonoBehaviour
     public int puntosEscena;
     public int puntosTotales;
     public int monedasUsables;
+
     [Header("No se destruye al cargar nueva escena")]// Este lo hago para poder probar en cada nivel con un gameManager pero en el exportado final solo habra una instancia de este.
     public bool dontDestroyOnLoad;
+    
     private int vidas = 3;
     public float tiempoTranscurrido;
     public float tiempoGuardar;
@@ -41,16 +45,18 @@ public class gameManager : MonoBehaviour
     public GameObject transicion;
     public GameObject AnimacionInicio;
 
-    //Los leera desde un archivo de guardado de mejoras
+   //Cantidad de mejoras y si las obtiene
     public int dobleSaltos ;
-
     public bool canDash;
 
+    //Objeto para guardar los datos.
     public FileManager fileManager;
     
     // Al iniciar se ejecuta este codigo
     private void Start()
     {
+
+        AudioManager.instance.PlayMusic("menu");
         puntosEscena = 0;
         puntosTotales = 0;
         tiempoGuardar = 1000000000000000000000000.00000000000000f;
@@ -73,6 +79,7 @@ public class gameManager : MonoBehaviour
         //Instancia el objeto que tiene la animacion al inicio
         Instantiate(AnimacionInicio) ;
 
+        //Carga los datos
         fileManager.CargarData(); 
 
     }
@@ -99,12 +106,16 @@ public class gameManager : MonoBehaviour
         }
     }
 
+
     //Lo que pasara cada vez que una escena se carga
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
        //Busca al jugador y su script porque cada escena tiene su objeto jugador
         player = GameObject.FindWithTag("Player");
         movement = player.GetComponent<movement>();
+  
+
+        //Activara la interfaz cuando no sea la primera escena de lo contrario reincia todas las variables.
         if (!SceneManager.GetActiveScene().buildIndex.Equals(0))
         {
             interfaz.SetActive(true);
@@ -124,6 +135,8 @@ public class gameManager : MonoBehaviour
             vidas = 3;
             
         }
+
+        hud.actualizarSalto(dobleSaltos);
     }
 
     //Funcion de perder vida recibe si es un enemigo y la cantidad de daño
@@ -171,6 +184,7 @@ public class gameManager : MonoBehaviour
     {
         //Genera un indice aleatorio lo activa espera cierto tiempo y lo desactiva
         int ind = Random.Range(0, pantallasMuertes.Length);
+        AudioManager.instance.PlaySfx("perder");
         pantallasMuertes[ind].SetActive(true);
         yield return new WaitForSeconds(1.2f);
         pantallasMuertes[ind].SetActive(false);
@@ -180,6 +194,7 @@ public class gameManager : MonoBehaviour
     //Metodo para ganar vida
     public bool ganarVida()
     {
+        //Si tienes el numero maximo de vidas no se puede obtener
         if (vidas == 3)
         {
             return false;
@@ -198,19 +213,21 @@ public class gameManager : MonoBehaviour
         hud.ActualizarPuntos(puntosEscena + puntosTotales);
     }
     
-    //En el update si la escena es diferente de la inicial y aparte no esta el tiempo pausado( una mejora) aumenta el tiempo transcurrido con la funcion Time.deltaTime y actualiza el tiempo
+    //En el update si la escena es diferente de la inicial empieza a contar el tiempo y permite abrir el menu de opciones.
+
+   
     private void Update()
     {
         if (!SceneManager.GetActiveScene().buildIndex.Equals(0))
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
+                AudioManager.instance.PlaySfx("transicion");
                 menuOpciones.SetActive(!menuOpciones.activeSelf);
             }
             tiempoTranscurrido += Time.deltaTime;
             hud.sumarTiempo(tiempoTranscurrido);
         }
- 
     }
 
     //Guarda la posicion del chekpoint al pasar sobre el, lo uso en otro script
@@ -231,14 +248,15 @@ public class gameManager : MonoBehaviour
     {
         //Corutina de transicion
         StartCoroutine(transition());
+
     }
 
 
     //La corutina de transicion activa la animacion espera un tiempo cambia de escena, espera otro tiempo y hacer la transicion
     IEnumerator transition()
     {
-      
 
+        AudioManager.instance.PlaySfx("transicion");
         transicion.SetActive(true);
         yield return new WaitForSeconds(0.8f);
         if (SceneManager.GetActiveScene().buildIndex.Equals(SceneManager.sceneCountInBuildSettings - 1))
@@ -249,7 +267,18 @@ public class gameManager : MonoBehaviour
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
+
         yield return new WaitForSeconds(0.4f);
+        if (SceneManager.GetActiveScene().buildIndex.Equals(0))
+        {
+            Debug.Log("0");
+            AudioManager.instance.PlayMusic("menu");
+        }
+        if (SceneManager.GetActiveScene().buildIndex.Equals(1))
+        {
+            AudioManager.instance.PlayMusic("nivelMusica");
+            Debug.Log("1");
+        }
         transicion.SetActive(false);
     }
 
@@ -283,7 +312,13 @@ public class gameManager : MonoBehaviour
     
     public void changeDoublejump()
     {
-        dobleSaltos += 1;
+        dobleSaltos += 3;
     }
 
+    public void usarDobleSalto()
+    {
+        dobleSaltos -= 1;
+        hud.actualizarSalto(dobleSaltos);
+       
+    }
 }

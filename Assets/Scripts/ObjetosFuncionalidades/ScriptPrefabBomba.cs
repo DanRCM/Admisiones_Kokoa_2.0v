@@ -22,8 +22,10 @@ public class ScriptPrefabBomba : MonoBehaviour
     {
         //Espera 2 segundos hasta activar la animacion de la explosion luego espera para activar el objeto de la explosion el cual es el encargado de hacer daño y desactiva el sprite para despues destruir al objeto.
         yield return new WaitForSeconds(2f);
+        
         animator.SetBool("kaboom",true);
         yield return new WaitForSeconds(0.6f);
+        AudioManager.instance.PlaySfx("kaboom");
         explosion.SetActive(true);
         if (bombaSprite != null)
         {

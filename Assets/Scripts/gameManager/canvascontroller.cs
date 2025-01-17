@@ -7,9 +7,9 @@ public class canvascontroller : MonoBehaviour
     private void Start()
     {
     
-        if (gameManager.instance.tiempoTranscurrido - gameManager.instance.puntosTotales*0.2f < gameManager.instance.tiempoGuardar)
+        if (gameManager.instance.tiempoTranscurrido - gameManager.instance.puntosTotales*0.1f < gameManager.instance.tiempoGuardar)
         {
-            gameManager.instance.tiempoGuardar = gameManager.instance.tiempoTranscurrido - gameManager.instance.puntosTotales*0.2f;
+            gameManager.instance.tiempoGuardar = gameManager.instance.tiempoTranscurrido - gameManager.instance.puntosTotales*0.1f;
             Debug.Log(gameManager.instance.tiempoGuardar);
             menusFinal[0].SetActive(true);
             menusFinal[1].SetActive(false);
